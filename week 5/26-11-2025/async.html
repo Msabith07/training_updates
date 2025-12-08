@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>async</title>
+</head>
+<body>
+    <script>
+        // async function hello() {
+        //     console.log("hello");
+        //     return 1
+        // }
+        // hello().then((x)=>{
+        //     console.log(x);
+        // })
+        // let h=hello()
+        // console.log(h);
+
+
+        async function weather() {
+            let w1= new Promise((resolve,reject)=>{
+                setTimeout(()=>{
+                    resolve("27 deg")
+                },2000) 
+            })
+            let w2= new Promise((resolve,reject)=>{
+                setTimeout(()=>{
+                    resolve("21 deg")
+                },5000) 
+            })
+            console.log("fetching delhi weather....")
+            let delhi=await w1;
+            //does not stop the timer of w2 but the execution of code beyound that 
+            //it helps when we make use of await only after dellhi variabke got the code beyound will run so we can use delhi after it 
+            console.log("fetched delhi weather: "+ delhi)
+            console.log("fetching bnglr weather....")
+            let bnglr=await w2;
+            console.log("fetched bnglr weather: "+ bnglr)
+            return [delhi,bnglr]
+        }
+        function cherry(){
+            console.log("cherry executed fisrt");
+            setTimeout(()=>{
+                console.log("this executed after 3 s");
+            },3000)
+        }
+        // let weath = weather();
+        // cherry()
+        // weath.then((value)=>{
+        //     console.log(value);
+        // })
+        async function mixed(){
+            weath = await weather();
+            console.log(weath);
+            cherry()
+            // weath.then((value)=>{
+            //  console.log(value);
+            // })
+            //will throw error cause now in weath variable there is value instead of promises
+        }
+        mixed()
+    </script>
+</body>
+</html>

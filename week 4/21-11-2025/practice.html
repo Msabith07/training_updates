@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>practice</title>
+    <style>
+        nav{
+            background-color: cyan;
+            display: flex;
+            padding: 10px;
+            gap: 10px;
+            list-style: none;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <li>hello </li>
+        <li>hello </li>
+        <li>hello </li>
+        <li>hello </li>
+    </nav>
+    <script>
+        document.getElementsByTagName("nav")[0].firstElementChild.style.color="red";
+        document.getElementsByTagName("nav")[0].lastElementChild.style.color="red";
+        Array.from(document.getElementsByTagName("li")).forEach((element)=>{
+            element.style.background="white";
+        })
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>error object</title>
+</head>
+<body>
+    <script>
+        // try{
+        //     sabi
+        // }
+        // catch(error){
+        //     console.log(error.name);
+        //     console.log(error.message);
+        // }
+        // catch(sab){
+            //     console.log(sab.name);
+            //     console.log(sab.message);
+        // }
+
+        // creating custom error
+        // try{
+        //     // throw new Error("sabi is boooooom")
+        //     throw new ReferenceError("sabi is boooooom")
+        // }
+        // catch(error){
+        //     console.log(error.name);
+        //     console.log(error.message);
+        //     console.log(error.stack);
+        // }
+
+        
+        try{
+            // throw new Error("sabi is boooooom")
+            let age =Number(parseInt(prompt("enter your age: ")))
+            if (age>120){
+
+                throw new ReferenceError("age is not true")
+            }
+            console.log("age is true");
+        }
+        catch(error){
+            console.log(error.name);
+            console.log(error.message);
+            console.log(error.stack);
+        }
+
+    </script>
+</body>
+</html>

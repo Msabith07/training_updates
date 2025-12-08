@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>traversal</title>
+</head>
+<body>
+    <!-- <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero, consequatur aut praesentium obcaecati incidunt harum quisquam delectus eveniet totam. Omnis ea culpa, ab assumenda distinctio vero velit quis adipisci commodi.</p>
+    <div>hi guysss       </div> -->
+    <ul>
+        <li><a href="">hi hi</a></li>
+        <li><a href="">hi hello</a></li>
+        <li><a href="">hi guyss</a></li>
+    </ul>
+    <script>
+        // console.log(document.body.children[1]);
+        // document.body.children[1].textContent="hi there";
+        let ul=document.body.children[0];
+        let li=ul.children[1];
+        let a=li.children[0];
+        a.style.backgroundColor="red";
+        a.textContent="red";
+        console.log(a);
+    </script>
+</body>
+</html>

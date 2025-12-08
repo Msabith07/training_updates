@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>console</title>
+</head>
+<body>
+    <script>
+        let obj={
+            sabi:9,
+            sabu:7,
+            saba:5
+        }
+        // for loop
+        console.time("time: ");
+        for(let i=0; i<Object.keys(obj).length;i++){
+            console.log(`the values of ${Object.keys(obj)[i]} is ${obj[Object.keys(obj)[i]]}`)
+            
+        }
+        console.timeEnd("time: ");
+        console.assert(5>55)
+        let w=confirm("do you really want to write ")
+        if(w==true){
+
+            document.write("hi there")
+        }
+        else{
+            document.write("hello there")
+
+        }
+    </script>
+    
+</body>
+</html>

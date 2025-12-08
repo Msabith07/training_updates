@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>events</title>
+</head>
+<body>
+        <div>
+            <button id="btn1">click here</button>
+        </div>
+        <script>
+            let x=function(event){
+                console.log(event.target);
+                console.log(event.type,event.clientX,event.clientY);
+                // alert("first")
+            };
+            let y=function(event){
+                alert("second")
+            };
+            btn1=document.getElementById("btn1");
+            btn1.addEventListener('click',x);
+            btn1.addEventListener('click',y);
+            let a= prompt("enter a value");
+            if(a==1){
+                btn1.removeEventListener('click',y)
+            }
+            if(a==2){
+                btn1.removeEventListener('click',x)
+            }
+
+
+            function  loadScript(src, callback){
+                const script=document.createElement("script");
+                script.src=src;
+                script.onload=function(){
+                    console.log("script loaded "+src);
+                    callback(null)
+                }
+                script.onerror=function(){
+                    console.log("error happened",src);
+                    callback(new Error("got some error"));
+                }
+                document.head.append(script);
+            }
+            function hello(error){
+                if(error){
+                    console.log(error);
+                }
+                else{
+                alert("hello");
+               }   
+                console.log("bobby");
+            }
+            loadScript("callback21.js",hello)
+        </script>
+</body>
+</html>

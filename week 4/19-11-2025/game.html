@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>game</title>
+</head>
+<body>
+    <script>
+        function getRandomElement(elements){
+            let randIndex=Math.floor(Math.random() * elements.length)
+            return elements[randIndex];
+        }
+        let elements=["paper","rock","scisser"];
+        let random_ele;
+        let confirm_type=true;
+        let choice;
+        while(confirm_type){
+            random_ele=getRandomElement(elements);
+            choice=prompt("enter your choice");
+            switch(choice){
+                case "paper":if(random_ele=="paper"){
+                                alert("draw")
+                            }
+                            else if(random_ele=="rock"){
+                                alert("win")
+                            }
+                            else if(random_ele=="scisser"){
+                                alert("lose")
+                            }
+                            break;
+                case "rock":if(random_ele=="paper"){
+                                alert("lose")
+                            }
+                            else if(random_ele=="rock"){
+                                alert("draw")
+                            }
+                            else if(random_ele=="scisser"){
+                                alert("win")
+                            }
+                            break;
+                case "scisser":if(random_ele=="paper"){
+                                alert("win")
+                            }
+                            else if(random_ele=="rock"){
+                                alert("lose")
+                            }
+                            else if(random_ele=="scisser"){
+                                alert("draw")
+                            }
+                            break;
+                            
+            }
+            confirm_type=confirm("do you want to try again")
+
+        }
+    </script>
+</body>
+</html>

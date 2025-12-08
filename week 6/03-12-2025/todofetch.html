@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TO-DO using fetch</title>
+    <style>
+      body {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      #inp {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        margin-top: -600px;
+        align-items: center;
+      }
+      .input {
+        width: 400px;
+        height: 50px;
+        font-size: 1.5rem;
+        text-align: center;
+      }
+      button {
+        width: 100px;
+        height: 50px;
+      }
+      .butn {
+        display: flex;
+        gap: 40px;
+        margin-top: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="inp">
+      <input
+        type="text"
+        class="input"
+        placeholder="Enter your name"
+        id="name"
+        name="input"
+        value=""
+      />
+      <input
+        type="text"
+        class="input"
+        placeholder="Enter your age"
+        id="age"
+        name="input"
+        value=""
+      />
+      <input
+        type="text"
+        class="input"
+        placeholder="Enter your gender"
+        id="gender"
+        name="input"
+        value=""
+      />
+      <input
+        type="text"
+        class="input"
+        placeholder="Enter your place"
+        id="place"
+        name="input"
+        value=""
+      />
+      <div class="butn">
+        <button id="edit">edit</button>
+        <button id="delete">delete</button>
+        <button id="submit">submit</button>
+      </div>
+      <div class="result" id="result"></div>
+    </div>
+    <script>
+      let name = document.getElementById("name");
+      let age = document.getElementById("age");
+      let gender = document.getElementById("gender");
+      let place = document.getElementById("place");
+      let res = document.getElementById("result");
+      let sub = document.getElementById("submit");
+      let del = document.getElementById("delete");
+      let edit = document.getElementById("edit");
+      async function myFunction() {
+        console.log("submited");
+        let option1 = {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify({
+            name: `${name.value}`,
+            age: `${age.value}`,
+            gender: `${gender.value}`,
+            place: `${place.value}`,
+          }),
+        };
+        let res = await fetch("http://localhost:3000/users", option1);
+        let data = await res.json();
+        console.log(data); //in console we cant see this cause during submition it resets the browser
+      }
+      async function delFunction() {
+        let named = prompt("enter the user name you want to delete");
+        let res = await fetch("http://localhost:3000/users");
+        let data = await res.json();
+        console.log(data);
+        for (let i in data) {
+          console.log(data[i]);
+          if (data[i].name == named) {
+            fetch(`http://localhost:3000/users/${data[i].id}`, {
+              method: "DELETE",
+            });
+          }
+        }
+      }
+      async function editFunction() {
+        let named = prompt("enter the user name you want to edit");
+        let res = await fetch("http://localhost:3000/users");
+        let data = await res.json();
+        let option2 = {
+          method: "PATCH",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify({
+            name: `${name.value}`,
+            age: `${age.value}`,
+            gender: `${gender.value}`,
+            place: `${place.value}`,
+          }),
+        };
+        for (let i in data) {
+          console.log(data[i]);
+          if (data[i].name == named) {
+            fetch(`http://localhost:3000/users/${data[i].id}`,option2);
+          }
+        }    
+      }
+      sub.addEventListener("click", myFunction);
+      del.addEventListener("click", delFunction);
+      edit.addEventListener("click", editFunction);
+    </script>
+  </body>
+</html>

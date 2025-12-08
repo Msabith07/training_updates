@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To-Do list</title>
+    <style>
+      * {
+        margin: 0px;
+      }
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .main {
+        height: 100vh;
+        width: 100%;
+        background: linear-gradient(to right, violet, rgb(104, 38, 104));
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 50px;
+        position: relative;
+      }
+      .task {
+        width: 30%;
+        height: 100px;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 2px 2px 22px black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+      }
+      .task input {
+        width: 70%;
+        height: 60%;
+        border: none;
+        font-size: 2rem;
+        text-align: center;
+        border-radius: 10px;
+      }
+      .task button {
+        height: 60%;
+        width: 13%;
+        background-color: rgb(59, 59, 233);
+        border-radius: 10px;
+        color: white;
+      }
+      .data {
+        width: 30%;
+        height: auto;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 2px 2px 22px black;
+        display: flex;
+        flex-direction: column;
+      }
+      .data .sub {
+        display: flex;
+        justify-content: space-around;
+      }
+      .data p {
+        width: 200px;
+        height: 60px;
+        text-align: center;
+        font-size: 2rem;
+        font-weight: bold;
+        margin-top: 40px;
+        cursor: pointer;
+      }
+      .data button {
+        height: 60px;
+        width: 80px;
+        margin-top: 30px;
+        font-size: 1.5rem;
+        border-style: none;
+        cursor: pointer;
+        border-radius: 10px;
+      }
+      .data button:hover {
+        background-color: red;
+        color: white;
+      }
+      #add {
+        cursor: pointer;
+        font-size: 1.2rem;
+      }
+      #add:hover {
+        transform: scale(110%);
+        transition: transform 0.1s ease;
+      }
+      .pop {
+        width: 600px;
+        height: 300px;
+        background-color: rgb(255, 255, 255);
+        border-radius: 10px;
+        box-shadow: 2px 2px 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 30px;
+        opacity: 0;
+      }
+      .pop.up {
+        transform: translateY(-620px);
+        transition: transform 1s ease;
+        opacity: 1;
+      }
+      #popinp {
+        width: 50%;
+        height: 40px;
+        border-radius: 10px;
+        box-shadow: 2px 2px 4px;
+        font-size: 1.2rem;
+        text-align: center;
+      }
+      .pop button {
+        height: 60px;
+        width: 80px;
+        font-size: 1.5rem;
+        border-style: none;
+        cursor: pointer;
+        border-radius: 10px;
+        box-shadow: 2px 2px 4px;
+      }
+      #edit {
+        transform: translateX(30px);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main">
+      <div class="task">
+        <input type="text" placeholder="Enter the task here" id="task" />
+        <button id="add" type="button">Add</button>
+      </div>
+      <div class="data" id="data"></div>
+    </div>
+    <div class="pop">
+      <h1>Edit From Here</h1>
+      <input type="text" id="popinp" />
+      <button id="edit2" type="button">edit</button>
+    </div>
+    <script>
+      let add = document.getElementById("add");
+      let task = document.getElementById("task");
+      let data = document.getElementById("data");
+      async function myFuncion(e) {
+        if (`${task.value}` != "") {
+          let option = {
+            method: "POST",
+            headers: {
+              "Content-type": "application/json",
+            },
+            body: JSON.stringify({
+              task: `${task.value}`,
+              status: "penting",
+              flag: 0,
+            }),
+          };
+          let res = fetch("http://localhost:3000/tasks", option);
+        }
+      }
+      add.addEventListener("click", myFuncion);
+      async function main() {
+        let res = await fetch("http://localhost:3000/tasks");
+        let val = await res.json();
+        for (let i in val) {
+          data.innerHTML += `<div class="sub">
+                      <p onclick="doneFunction(event)" id=${val[i].id}>${val[i].task}</p>
+                      <button onclick="editFunction(event)" data-id=${val[i].id} id="edit">edit</button>
+                      <button onclick="delFunction(event)" data-id=${val[i].id} type="button">delete</button>
+                      </div>
+                      `;
+        }
+      }
+      main();
+      async function delFunction(event) {
+        let x = event.target.dataset.id;
+        let res = await fetch("http://localhost:3000/tasks");
+        let val = await res.json();
+        for (let i in val) {
+          if (val[i].id == x) {
+            await fetch(`http://localhost:3000/tasks/${val[i].id}`, {
+              method: "DELETE",
+            });
+          }
+        }
+      }
+      async function editFunction(event) {
+        let x = event.target.dataset.id;
+        let b = document.getElementById("edit");
+        let pop = document.getElementsByClassName("pop")[0];
+        pop.classList.add("up");
+        let popinp = document.getElementById("popinp");
+        let edit2 = document.getElementById("edit2");
+        let res = await fetch("http://localhost:3000/tasks");
+        let val = await res.json();
+        for (let i in val) {
+          if (val[i].id == x) {
+            popinp.value = `${val[i].task}`;
+            edit2.addEventListener("click", async () => {
+              pop.classList.remove("up");
+              await fetch(`http://localhost:3000/tasks/${val[i].id}`, {
+                method: "PATCH",
+                headers: {
+                  "Content-type": "application/json",
+                },
+                body: JSON.stringify({
+                  task: `${popinp.value}`,
+                }),
+              });
+            });
+          }
+        }
+      }
+      async function doneFunction(event) {
+        let x = event.target;
+        let c;
+        let res = await fetch("http://localhost:3000/tasks");
+        let val = await res.json();
+        for (let i in val) {
+          c = `${val[i].flag}`;
+          if (val[i].task == x.innerText) {
+            await fetch(`http://localhost:3000/tasks/${val[i].id}`, {
+              method: "PATCH",
+              headers: {
+                "Content-type": "application/json",
+              },
+              body: JSON.stringify({
+                status: "Done",
+                flag: `${++c}`,
+              }),
+            });
+          }
+        }
+      }
+      async function cross() {
+        let res = await fetch("http://localhost:3000/tasks");
+        let val = await res.json();
+        let para;
+        for (let i in val) {
+          if (val[i].status == "Done") {
+            para = document.getElementById(`${val[i].id}`);
+            para.innerHTML = `<del>${val[i].task}</del>`;
+          }
+        }
+      }
+      cross();
+
+      async function nocross() {
+        let res = await fetch("http://localhost:3000/tasks");
+        let val = await res.json();
+        let para;
+        for (let i in val) {
+          if (val[i].flag == 2) {
+            para = document.getElementById(`${val[i].id}`);
+            para.innerHTML = `${val[i].task}`;
+            await fetch(`http://localhost:3000/tasks/${val[i].id}`, {
+              method: "PATCH",
+              headers: {
+                "Content-type": "application/json",
+              },
+              body: JSON.stringify({
+                status: "penting",
+                flag: `${0}`,
+              }),
+            });
+          }
+        }
+      }
+      nocross();
+    </script>
+  </body>
+</html>

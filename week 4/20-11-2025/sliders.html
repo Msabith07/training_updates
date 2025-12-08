@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>sliders</title>
+    <style>
+      * {
+        transition: all 1s ease;
+      }
+      .main {
+        background-color: lightblue;
+        height: 80vh;
+        width: 100%;
+        display: flex;
+        padding: 10px;
+        position: relative;
+      }
+      .about {
+        margin: 10px;
+        flex: 50%;
+        background-color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 30px;
+        text-align: justify;
+        text-align-last: center;
+        flex-direction: column;
+        box-shadow: 2px 2px 6px black;
+      }
+      .slide1 {
+        background-color: gray;
+        width: 30px;
+        height: 30px;
+        transform: translate(-30px, 1250px);
+
+        cursor: pointer;
+      }
+      .firstslide {
+        transform: translateX(650px);
+      }
+      .back1slide {
+        transform: translateX(0px);
+      }
+      .img {
+        margin: 10px;
+        flex: 50%;
+        background-color: white;
+        display: flex;
+        padding: 20px;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 2px 2px 6px black;
+      }
+      .img img {
+        width: 80%;
+        height: 80%;
+      }
+      .slide2 {
+        background-color: gray;
+        width: 30px;
+        height: 30px;
+        transform: translate(30px, 1250px);
+        cursor: pointer;
+      }
+      .secondslide {
+        transform: translateX(-750px);
+      }
+      .back2slide {
+        transform: translateX(0px);
+      }
+    </style>
+    <script>
+      function myFunction1() {
+        console.log("first activated");
+        let one = document.getElementById("slide1");
+        let two = document.getElementById("slide2");
+        let click1 = one.classList.contains("firstslide");
+        if (!click1) {
+          one.classList.add("firstslide");
+          one.classList.remove("back1slide");
+          two.style.zIndex = 0;
+          one.style.zIndex = 1;
+          two.style.opacity = 0.5;
+        } else {
+          one.classList.remove("firstslide");
+          one.classList.add("back1slide");
+          two.style.zIndex = 0;
+          one.style.zIndex = 1;
+          two.style.opacity = 1;
+        }
+      }
+      function myFunction2() {
+        console.log("second activated");
+        let one = document.getElementById("slide1");
+        let two = document.getElementById("slide2");
+        let click2 = two.classList.contains("secondslide");
+        if (!click2) {
+          two.classList.add("secondslide");
+          two.classList.remove("back2slide");
+          two.style.zIndex = 1;
+          one.style.zIndex = 0;
+          one.style.opacity = 0.5;
+        } else {
+          two.classList.remove("secondslide");
+          two.classList.add("back2slide");
+          two.style.zIndex = 1;
+          one.style.zIndex = 0;
+          one.style.opacity = 1;
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="about" id="slide1">
+        <h1>Lorem ipsum dolor sit amet.</h1>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae
+          sit quia praesentium suscipit dolorem iure velit, quidem natus tempore
+          laudantium similique perspiciatis. Cum ad et facilis architecto sed!
+          Laudantium, assumenda?
+        </p>
+      </div>
+      <div class="slide1" onclick="myFunction1()"></div>
+      <div class="slide2" onclick="myFunction2()"></div>
+      <div class="img" id="slide2">
+        <img src="MUhammad_Sabith.jpg" alt="hi" />
+      </div>
+    </div>
+  </body>
+</html>

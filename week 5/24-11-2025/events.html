@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>events</title>
+</head>
+<body>
+    <!-- <div class="container" onclick="console.log('mouse has entered');">  -->
+    <!-- <div class="container">  -->
+        <!-- <button>click here</button> -->
+        <!-- <button onclick="alert('hi there');
+        let a=60; console.log(a);">click here</button> -->
+    <!-- </div> -->
+        <!-- <script>
+            let b=document.getElementsByClassName("container")[0];
+            // console.log(b);
+            b.onclick=()=>{
+                console.log("hi there");}
+        </script> -->
+        <div>
+            <button id="btn1">click here</button>
+        </div>
+        <script>
+            let x=function(event){
+                console.log(event.target);
+                console.log(event.type,event.clientX,event.clientY);
+                // alert("first")
+            };
+            let y=function(event){
+                alert("second")
+            };
+            btn1=document.getElementById("btn1");
+            btn1.addEventListener('click',x);
+            btn1.addEventListener('click',y);
+            let a= prompt("enter a value");
+            if(a==1){
+                btn1.removeEventListener('click',y)
+            }
+            if(a==2){
+                btn1.removeEventListener('click',x)
+            }
+        </script>
+</body>
+</html>

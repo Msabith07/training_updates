@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>array</title>
+</head>
+<body>
+    <script>
+        // let n=[1,2,3,4,5,6];
+        // let num=Number.parseInt(prompt("enter the number to add to array "));
+        // while(num!=0){
+        //     let num=Number.parseInt(prompt("enter the number to add to array "));
+            
+        //     console.log(n.push(num));
+        // }
+        // n.push(num);
+        // let num;
+        // let num1;
+        // do{
+        //     num=Number.parseInt(prompt("enter the number "));
+        //     num1=Number.parseInt(num)
+        //     n.push(num1);
+        // }while(num!=0)
+        // console.log(n);
+
+
+        // let num=n.filter((value)=>{return value%3===0;});
+        // console.log(num);
+
+
+        // let num=n.map((value)=>{return value*value;});
+        // console.log(num);
+
+
+        // let num=n.reduce((value1,value2)=>{return value1*value2;});
+        // console.log(num);
+
+        let num=Number(53);
+        let n1=prompt("guese the number");
+        let n= Number.parseInt(n1);
+        console.log(n);
+        do{
+            if(n<num){
+                n1=prompt(`${n} is less then the number guese another number`);
+                n=Number.parseInt( n1);
+            }
+            else if (n>num){
+                n1=prompt(`${n} is greater then the number guese another number`);
+                n= Number.parseInt(n1);
+            }
+            else if(Number.isNaN(n)){
+                n1=prompt(`${n1} its not valid enter another number`);
+                n= Number.parseInt(n1);
+            }
+            else{
+                break;
+            }
+        }while(n!==num)
+        console.log(n);
+    </script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eye</title>
+    <style>
+        *{
+            transition: all .01s ease;
+        }
+        body{
+            height: 100vh;
+            width: 100%;
+        }
+        .parent{
+            height: 100%;
+            width: 100%;
+            background-color: lightgrey;
+            position: relative;
+            overflow: hidden;
+            position: relative;
+            
+        }
+        .main{
+            position: absolute;
+            height: 10%;
+            width: 10%;
+            background-color: white;
+            border-radius: 50%;
+            position: absolute;
+            
+        }
+    </style>
+</head>
+<body>
+    <div class="parent" onmousemove="myFunction(event)">
+    <div class="main">
+    </div>
+    </div>
+    <script>
+        function myFunction(event){
+            // console.log("mouse entered");
+            let x=event.clientX
+            let y=event.clientY
+            // console.log(typeof x);
+            // console.log(event.clientX,event.clientY);
+            let sub=document.getElementsByClassName("main")[0];
+            let parent=document.getElementsByClassName("parent")[0];
+            // console.log(sub);
+            sub.style.transform=`translate(${x}px,${y}px)`
+            sub.style.background=`linear-gradient(${xPercent}deg, rgb${xPercent})`
+            // sub.style.transformY="y";
+        }
+    </script>
+</body>
+</html>

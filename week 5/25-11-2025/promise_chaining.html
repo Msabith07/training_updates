@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promise chaining</title>
+</head>
+<body>
+    <script>
+        let p1=new Promise(function(resolve,reject){
+            setTimeout(() => {
+                console.log("after 2 second");
+                resolve(56)
+            }, 2000);
+        })
+        p1.then(value=>{
+            console.log(value);
+            // here instead of p2 we can directlly pass return new Promise .........
+            let p2= new Promise(function(resolve,reject){
+                setTimeout(() => {
+                    console.log("second p2");
+                    resolve("done")
+                }, 2000);
+            })
+            return p2;
+        }).then((value)=>{
+            setTimeout(()=>{
+                console.log("done");
+            },2000)
+            return 2
+        }).then((value)=>{
+            console.log("actually done"+value);
+        })
+    </script>
+</body>
+</html>

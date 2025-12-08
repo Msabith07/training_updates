@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>html attribute</title>
+    <style>
+        .sab{
+            font-size: 10px;
+            background-color: black;
+        }
+    </style>
+</head>
+<body>
+    <div class="sabi" id="sab" style="color: red;" data-game="free fire">hi there </div>
+    <script>
+        let div=document.getElementsByClassName("sabi")[0];
+        console.log(div.getAttribute("id"));
+        console.log(div.hasAttribute("style"));
+        div.setAttribute("style","color:red")
+        div.setAttribute("class","true sab")
+        div.removeAttribute("class","sab")
+        console.log(div.dataset.game);
+        // console.log(div.attributes);
+        // console.log(cls);
+        // div.setAttribute("hidden","true")
+        // let div=document.getElementById("sab");
+        // console.log(div.getAttribute("class"));
+    </script>
+</body>
+</html>
